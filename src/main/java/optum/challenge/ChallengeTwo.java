@@ -25,6 +25,11 @@ class ChallengeTwo {
 
             initialString = reduceString(initialString, canBeReduced, reductionAction);
 
+            // do the reverse as well
+            initialString.reverse();
+
+            initialString = reduceString(initialString, canBeReduced, reductionAction);
+
             return initialString != null ? "" + initialString.length() : "0";
         }
         return str != null ? "" + str.length() : "0";
@@ -57,7 +62,7 @@ class ChallengeTwo {
             for (int i = 2; i < stringToCheck.length(); i++) {
                 String nextElement = "" + stringToCheck.charAt(i);
                 if (reducedString.length() >= 2 && canBeReduced.test(reducedString)) {
-                    reductionAction.apply(reducedString).append(nextElement);
+                    reductionAction.apply(reducedString).append(nextElement).append(nextElement);
                 } else {
                     reducedString.append(nextElement);
                 }
