@@ -18,3 +18,12 @@
 <li>https://www.baeldung.com/java-indexof-find-string-occurrences</li>
 <li>other general googling and reading of articles and documentation but too time consuming to list. The first two were most important for delivering a solution i could deliver </li>
 </ul>
+
+<h1>Challenge Two</h1>
+
+<h3>My understanding from Challenge Text</h3>
+
+<ul>
+<li></li>
+</ul>
+

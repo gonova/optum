@@ -22,4 +22,11 @@ public class ChallengeTwoTest {
         assertEquals("4", ChallengeTwo.StringChallenge("cccc"));
     }
 
+    @Test
+    public void testThree() {
+
+        assertEquals("2", ChallengeTwo.StringChallenge("aabc"));
+    }
+
+
 }
