@@ -28,5 +28,8 @@ public class ChallengeTwoTest {
         assertEquals("2", ChallengeTwo.StringChallenge("aabc"));
     }
 
-
+    @Test
+    public void testFour() {
+        assertEquals(("1"), ChallengeTwo.StringChallenge("bcab"));
+    }
 }

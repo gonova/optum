@@ -2,32 +2,71 @@ package optum.challenge;
 
 import java.util.*;
 import java.io.*;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class ChallengeTwo {
 
     public static String StringChallenge(String str) {
 
-        // only letters a,b and c will be input - can ignore error handling for now
+        if (str.length() > 2) {
 
-        // split the string up into a list of three character strings
-        // note not all groups will be of length 3 e.g. str = "abcab" or "aa"
-        String[] groupsOfThree = str.split("(?<=\\G...)");
+            Predicate<StringBuilder> canBeReduced = reducedString -> ((reducedString.charAt(reducedString.length()-2) != reducedString.charAt(reducedString.length()-1)));
 
-        Predicate<String> canBeReduced = element -> (element.length() == 3 && (element.charAt(0) != element.charAt(1)));
-        UnaryOperator<String> reductionAction = element -> element.substring(2,3).concat(element.substring(2,3));
+            UnaryOperator<StringBuilder> reductionAction = reducedString -> reducedString.length() == 2 ? reducedString.delete(reducedString.length()-2,reducedString.length()) : new StringBuilder("");
 
-        String newString = Arrays.stream(groupsOfThree).reduce("", ( reducedString, element)
-                -> canBeReduced.test(element) ? reducedString.concat(reductionAction.apply(element)) : reducedString.concat(element) );
+            // initialise the String to check
+            StringBuilder initialString = new StringBuilder(str);
 
-        return newString != null ? "" + newString.length() : "0";
+            initialString = reduceString(initialString, canBeReduced, reductionAction);
+
+            return initialString != null ? "" + initialString.length() : "0";
+        }
+        return str != null ? "" + str.length() : "0";
     }
 
+    /**
+     *
+     * @param stringToCheck
+     * @param canBeReduced
+     * @param reductionAction
+     * @return
+     */
+    public static StringBuilder reduceString(StringBuilder stringToCheck, Predicate<StringBuilder> canBeReduced, UnaryOperator<StringBuilder> reductionAction) {
 
+        StringBuilder reducedString = null;
+
+        // initialise the reduced String
+        if (stringToCheck.length() == 3) {
+            // initialise the reduced String
+            reducedString = new StringBuilder(stringToCheck.substring(0,2));
+
+            if (canBeReduced.test(reducedString)) {
+                return reductionAction.apply(reducedString).append(stringToCheck.charAt(2));
+            }
+
+        } else {
+            // initialise the reduced String
+            reducedString = new StringBuilder(stringToCheck.substring(0,2));
+
+            for (int i = 2; i < stringToCheck.length(); i++) {
+                String nextElement = "" + stringToCheck.charAt(i);
+                if (reducedString.length() >= 2 && canBeReduced.test(reducedString)) {
+                    reductionAction.apply(reducedString).append(nextElement);
+                } else {
+                    reducedString.append(nextElement);
+                }
+            }
+
+            return reducedString;
+        }
+        return new StringBuilder();
+    }
 
     public static void main (String[] args) {
         // keep this function call here

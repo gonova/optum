@@ -24,6 +24,15 @@
 <h3>My understanding from Challenge Text</h3>
 
 <ul>
-<li></li>
+<li>Only letters a,b and c will be in input</li>
+<li>to reduce take two adjacent characters and replace with a character either before or after it.</li>
 </ul>
 
+<h3>Resources Used</h3>
+
+<ul>
+<li>https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#stream-T:A-int-int-</li>
+<li>https://www.baeldung.com/java-8-streams</li>
+<li>https://stackoverflow.com/questions/2297347/splitting-a-string-at-every-n-th-character</li>
+<li>https://www.baeldung.com/java-stream-reduce</li>
+</ul>
